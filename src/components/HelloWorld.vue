@@ -6,6 +6,19 @@
     <el-table-column prop="introduce" label="introduce" ></el-table-column>
     <el-table-column prop="price" label="price" ></el-table-column>
     </el-table>
+     <div class="block">
+      <span class="demonstration"></span>
+      <el-pagination
+        @size-change="handleSizeChange"   
+        @current-change="handleCurrentChange"
+        :current-page="1"
+        :page-sizes="[2, 4]"
+        :page-size="5"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="checkList.length"
+      >
+      </el-pagination>
+    </div>
         <el-button  type="primary">按钮</el-button>
     <h1/>
     <input v-model="$store.state.inputVal" type="text">
@@ -24,12 +37,18 @@
       ...mapState(['list', 'inputVal','checkList'])
     },
     methods: {
-      ...mapActions(['changeListValue', 'handleDel','getInfo'])
+      ...mapActions(['changeListValue', 'handleDel','getInfo']),
+    handleSizeChange(val) {
+      this.limitePage.limit = val;
+    },
+    handleCurrentChange(val) {
+      this.limitePage.page = val
+    }
     },
 
     mounted() {
-       let a=this.getInfo()
-        console.log(a)
+       this.getInfo()
+      // console.log(a)
     }
   }
 </script>
