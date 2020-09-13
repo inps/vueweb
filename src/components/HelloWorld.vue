@@ -19,13 +19,21 @@
       >
       </el-pagination>
     </div>
-        <el-button  type="primary">按钮</el-button>
+
     <h1/>
-    <input v-model="$store.state.inputVal" type="text">
-    <button @click="changeListValue(inputVal)">增加事项</button>
+    <el-col :span="8">
     <ul v-for="(item, idx) in list" :key="item.key">
       <li @click="handleDel(idx)">{{item}}</li>
     </ul>
+    </el-col>
+    <el-col :span="8">
+    <el-input v-model="$store.state.inputVal"   placeholder="请输入内容" type="text"/> 
+    </el-col>
+    <el-col :span="8">
+    <el-button @click="changeListValue(inputVal)" type="primary">增加事项</el-button>
+     </el-col>
+
+    
   </div>
 </template>
 
