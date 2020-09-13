@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <el-table :data="checkList">
+    <el-table :data="checkList.slice((currentPage-1)*pagesize,currentPage*pagesize)">
     <el-table-column prop="pid" label="pid" ></el-table-column>
     <el-table-column prop="name" label="name" ></el-table-column>
     <el-table-column prop="introduce" label="introduce" ></el-table-column>
@@ -11,9 +11,9 @@
       <el-pagination
         @size-change="handleSizeChange"   
         @current-change="handleCurrentChange"
-        :current-page="1"
+        :current-page="currentPage"
         :page-sizes="[2, 4]"
-        :page-size="5"
+        :page-size="pagesize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="checkList.length"
       >
@@ -33,16 +33,24 @@
   import {mapState, mapActions} from 'vuex'
   export default {
     name: 'HelloWorld',
+    data() {
+    return {
+      currentPage: 1,
+      pagesize: 2,
+
+    };
+  },
     computed: {
       ...mapState(['list', 'inputVal','checkList'])
     },
     methods: {
       ...mapActions(['changeListValue', 'handleDel','getInfo']),
     handleSizeChange(val) {
-      this.limitePage.limit = val;
+      this.pagesize  = val;
+      this.currentPage = 1;
     },
     handleCurrentChange(val) {
-      this.limitePage.page = val
+       this.currentPage  = val
     }
     },
 
