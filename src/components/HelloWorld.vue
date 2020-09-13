@@ -1,6 +1,13 @@
 <template>
   <div class="hello">
-    <h1>{{$store.state.checkList}}</h1>
+    <el-table :data="checkList">
+    <el-table-column prop="pid" label="pid" ></el-table-column>
+    <el-table-column prop="name" label="name" ></el-table-column>
+    <el-table-column prop="introduce" label="introduce" ></el-table-column>
+    <el-table-column prop="price" label="price" ></el-table-column>
+    </el-table>
+        <el-button  type="primary">按钮</el-button>
+    <h1/>
     <input v-model="$store.state.inputVal" type="text">
     <button @click="changeListValue(inputVal)">增加事项</button>
     <ul v-for="(item, idx) in list" :key="item.key">
@@ -21,7 +28,8 @@
     },
 
     mounted() {
-        this.getInfo()
+       let a=this.getInfo()
+        console.log(a)
     }
   }
 </script>

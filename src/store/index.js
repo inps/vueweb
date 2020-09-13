@@ -36,6 +36,7 @@ const store = new Vuex.Store({
         axios.get('https://easy-mock.com/mock/5d41481656e5d340d0338e4b/shop/commodity')
             .then(res => {
                 context.commit('changeList',res)
+                console.log(res.data)
             }).catch(err => {
                 console.log(err)
             })
